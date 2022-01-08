@@ -51,7 +51,7 @@ class Journal {
 
 	public void saveEntry(String filename) throws FileNotFoundException {
 		try (PrintStream out = new PrintStream(filename)) {
-			out.println(toString());
+			out.println(this);
 		}
 	}
 
