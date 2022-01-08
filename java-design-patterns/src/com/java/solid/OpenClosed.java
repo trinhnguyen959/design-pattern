@@ -62,6 +62,7 @@ class ProductFilter {
 	}
 }
 
+/*SOLUTION*/
 interface Specification<T> {
 	boolean isSatisfied(T item);
 }

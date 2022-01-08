@@ -27,6 +27,7 @@ public class SingleResponsibility {
 	}
 }
 
+/*SOLUTION*/
 class Persistence {
 	public void saveToFile(Journal journal, String filename, boolean override) throws FileNotFoundException {
 		if (override || new File(filename).exists()) {

@@ -50,6 +50,7 @@ class OldFashionPrinter implements Machine {
 	}
 }
 
+/*SOLUTION*/
 interface Printer {
 	void print(Document document);
 }
