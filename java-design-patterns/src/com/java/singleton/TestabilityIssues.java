@@ -13,6 +13,10 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+interface Database {
+	int getPopulation(String name);
+}
+
 public class TestabilityIssues {
 	@Test
 	void singletonTotalPopulationTest() {
@@ -21,10 +25,17 @@ public class TestabilityIssues {
 		int totalPopulation = finders.getTotalPopulation(names);
 		assertEquals(17500000 + 17400000, totalPopulation);
 	}
+
+	@Test
+	void dependentPopulationsTest() {
+		DummyDatabase database = new DummyDatabase();
+		ConfigurableRecordFinders finders = new ConfigurableRecordFinders(database);
+		assertEquals(4, finders.getTotalPopulation(List.of("alpha", "gamma")));
+	}
 }
 
-class SingletonDatabase {
-	private Dictionary<String, Integer> capitals = new Hashtable<>();
+class SingletonDatabase implements Database {
+	private final Dictionary<String, Integer> capitals = new Hashtable<>();
 	private static int instanceCount = 0;
 
 	public static int getCount() {
@@ -33,7 +44,7 @@ class SingletonDatabase {
 
 	private SingletonDatabase() {
 		instanceCount++;
-		System.out.println("Initializing Database...");
+		System.out.println("Initializing Database... " + instanceCount);
 
 		try {
 			File file = new File(SingletonDatabase.class.getProtectionDomain().getCodeSource().getLocation().getPath());
@@ -55,6 +66,7 @@ class SingletonDatabase {
 		return INSTANCE;
 	}
 
+	@Override
 	public int getPopulation(String name) {
 		return capitals.get(name);
 	}
@@ -67,6 +79,37 @@ class SingletonRecordFinders {
 			result += SingletonDatabase.getInstance().getPopulation(name);
 		}
 		return result;
+	}
+}
+
+class ConfigurableRecordFinders {
+	private final Database database;
+
+	public ConfigurableRecordFinders(Database database) {
+		this.database = database;
+	}
+
+	public int getTotalPopulation(List<String> names) {
+		int result = 0;
+		for (String name : names) {
+			result += database.getPopulation(name);
+		}
+		return result;
+	}
+}
+
+class DummyDatabase implements Database {
+	private final Dictionary<String, Integer> data = new Hashtable<>();
+
+	public DummyDatabase() {
+		data.put("alpha", 1);
+		data.put("beta", 2);
+		data.put("gamma", 3);
+	}
+
+	@Override
+	public int getPopulation(String name) {
+		return data.get(name);
 	}
 }
 
