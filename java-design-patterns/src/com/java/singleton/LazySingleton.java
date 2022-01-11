@@ -28,3 +28,10 @@ public class LazySingleton {
 		return instance;
 	}
 }
+
+class LazySingletonApplication {
+	public static void main(String[] args) {
+		LazySingleton.getInstance();
+		LazySingleton.getInstanceDoubleChecked();
+	}
+}
