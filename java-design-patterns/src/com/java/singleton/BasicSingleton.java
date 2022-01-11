@@ -1,6 +1,13 @@
 package com.java.singleton;
 
-public class BasicSingleton {
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
+public class BasicSingleton implements Serializable {
 	private BasicSingleton() {
 	}
 
@@ -32,4 +39,38 @@ class Application {
 	}
 }
 
+class SingletonIssue {
+	public static void main(String[] args) throws IOException, ClassNotFoundException {
+		//1. Reflection
+		//2. Serializations
 
+		BasicSingleton instance = BasicSingleton.getInstance();
+		instance.setValue(111);
+
+		String fileName = "singleton.bin";
+		saveToFile(instance, fileName);
+
+		instance.setValue(222);
+
+		BasicSingleton readFromFile = readFromFile(fileName);
+
+		System.out.println(instance == readFromFile); // false
+
+		System.out.println(instance.getValue()); // 222
+		System.out.println(readFromFile.getValue()); // 111
+	}
+
+	static void saveToFile(BasicSingleton singleton, String filename) throws IOException {
+		try (FileOutputStream fos = new FileOutputStream(filename);
+			 ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+			oos.writeObject(singleton);
+		}
+	}
+
+	static BasicSingleton readFromFile(String filename) throws IOException, ClassNotFoundException {
+		try (FileInputStream fis = new FileInputStream(filename);
+			 ObjectInputStream ios = new ObjectInputStream(fis)) {
+			return (BasicSingleton) ios.readObject();
+		}
+	}
+}
