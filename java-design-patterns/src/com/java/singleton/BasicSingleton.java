@@ -26,6 +26,12 @@ public class BasicSingleton implements Serializable {
 	public void setValue(int value) {
 		this.value = value;
 	}
+
+	// fix issue
+
+	protected Object readResolve() {
+		return INSTANCE;
+	}
 }
 
 class Application {
