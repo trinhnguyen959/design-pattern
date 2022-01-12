@@ -1,5 +1,10 @@
 package com.java.bridge;
 
+import com.google.inject.AbstractModule;
+import com.google.inject.Guice;
+import com.google.inject.Inject;
+import com.google.inject.Injector;
+
 public class Bridge {
 	public static void main(String[] args) {
 		RasterRenderer rasterRenderer = new RasterRenderer();
@@ -9,6 +14,15 @@ public class Bridge {
 		circle.draw();
 		circle.resize(2);
 		circle.draw();
+
+		System.out.println("---------------------------");
+
+		Injector injector = Guice.createInjector(new ShapeModule());
+		Circle instance = injector.getInstance(Circle.class);
+		instance.radius = 3;
+		instance.draw();
+		instance.resize(2);
+		instance.draw();
 	}
 }
 
@@ -45,6 +59,7 @@ abstract class Shape {
 class Circle extends Shape {
 	public float radius;
 
+	@Inject
 	public Circle(Render render) {
 		super(render);
 	}
@@ -62,5 +77,12 @@ class Circle extends Shape {
 	@Override
 	public void resize(float factor) {
 		radius *= factor;
+	}
+}
+
+class ShapeModule extends AbstractModule {
+	@Override
+	protected void configure() {
+		bind(Render.class).to(VectorRenderer.class);
 	}
 }
