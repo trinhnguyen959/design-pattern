@@ -83,7 +83,7 @@ class LineToPointAdapter extends ArrayList<Point> {
 		int dy = line.end.y - line.start.y;
 
 		if (dx == 0) {
-			for (int y = top; y <= bottom; y++) {
+			for (int y = top; y <= bottom; ++y) {
 				add(new Point(left, y));
 			}
 		}
