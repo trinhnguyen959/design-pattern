@@ -19,8 +19,8 @@ public class FacadeApplication {
 }
 
 class Buffer {
-	private char[] characters;
-	private int lineWidth;
+	private final char[] characters;
+	private final int lineWidth;
 
 	public Buffer(int lineHeight, int lineWidth) {
 		characters = new char[lineHeight * lineWidth];
@@ -39,12 +39,12 @@ class ViewPort {
 	private final int offsetX;
 	private final int offsetY;
 
-	public ViewPort(Buffer buffer1, int width1, int height1, int offsetX1, int offsetY1) {
-		this.buffer = buffer1;
-		this.width = width1;
-		this.height = height1;
-		this.offsetX = offsetX1;
-		this.offsetY = offsetY1;
+	public ViewPort(Buffer buffer, int width, int height, int offsetX, int offsetY) {
+		this.buffer = buffer;
+		this.width = width;
+		this.height = height;
+		this.offsetX = offsetX;
+		this.offsetY = offsetY;
 	}
 
 	public char charAt(int x, int y) {
