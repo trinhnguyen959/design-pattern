@@ -1,6 +1,6 @@
 package com.java.visitor;
 
-public class Visitor {
+public class IntrusiveVisitor {
 	public static void main(String[] args) {
 		AdditionExpression additionExpression = new AdditionExpression(
 				new DoubleExpression(1),
