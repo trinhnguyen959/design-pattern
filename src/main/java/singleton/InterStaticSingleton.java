@@ -6,13 +6,13 @@ public class InterStaticSingleton {
 		System.out.println("InterStaticSingleton initializing...");
 	}
 
+	public static InterStaticSingleton getInstance() {
+		return Implementation.INSTANCE;
+	}
+
 	private static class Implementation {
 		private static final InterStaticSingleton INSTANCE = new InterStaticSingleton();
 
-	}
-
-	public static InterStaticSingleton getInstance() {
-		return Implementation.INSTANCE;
 	}
 }
 

@@ -14,7 +14,7 @@ public class StringDecorator {
 }
 
 class MagicString {
-	private String string;
+	private final String string;
 
 	public MagicString(String string) {
 		this.string = string;

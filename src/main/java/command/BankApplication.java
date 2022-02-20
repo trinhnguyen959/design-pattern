@@ -2,6 +2,10 @@ package command;
 
 import java.util.List;
 
+interface Command {
+	void call();
+}
+
 public class BankApplication {
 	public static void main(String[] args) {
 		BankAccount bankAccount = new BankAccount();
@@ -20,8 +24,8 @@ public class BankApplication {
 }
 
 class BankAccount {
-	private int balance;
 	private final int overdraftLimit = -500;
+	private int balance;
 
 	public void deposit(int amount) {
 		balance += amount;
@@ -43,12 +47,16 @@ class BankAccount {
 	}
 }
 
-interface Command {
-	void call();
-}
-
 class BankAccountCommand implements Command {
 	private final BankAccount bankAccount;
+	private final Action action;
+	private final int amount;
+
+	public BankAccountCommand(BankAccount bankAccount, Action action, int amount) {
+		this.bankAccount = bankAccount;
+		this.action = action;
+		this.amount = amount;
+	}
 
 	@Override
 	public void call() {
@@ -64,14 +72,5 @@ class BankAccountCommand implements Command {
 
 	public enum Action {
 		DEPOSIT, WITHDRAW
-	}
-
-	private final Action action;
-	private final int amount;
-
-	public BankAccountCommand(BankAccount bankAccount, Action action, int amount) {
-		this.bankAccount = bankAccount;
-		this.action = action;
-		this.amount = amount;
 	}
 }

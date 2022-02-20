@@ -11,6 +11,24 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
+enum States {
+	OFF_HOOK, // starting
+	ON_HOOK, // terminal
+	CONNECTING,
+	CONNECTED,
+	ON_HOLD
+}
+
+enum Events {
+	CALL_DIALED,
+	HUNG_UP,
+	CALL_CONNECTED,
+	PLACED_ON_HOLD,
+	TAKEN_OFF_HOLD,
+	LEFT_MESSAGE,
+	STOP_USING_PHONE
+}
+
 public class StateMachineApplication {
 	public static StateMachine<States, Events> buildMachine() throws Exception {
 		StateMachineBuilder.Builder<States, Events> builder
@@ -114,22 +132,4 @@ public class StateMachineApplication {
 		} while (machine.getState().getId() != exitState);
 		System.out.println("And we are done!");
 	}
-}
-
-enum States {
-	OFF_HOOK, // starting
-	ON_HOOK, // terminal
-	CONNECTING,
-	CONNECTED,
-	ON_HOLD
-}
-
-enum Events {
-	CALL_DIALED,
-	HUNG_UP,
-	CALL_CONNECTED,
-	PLACED_ON_HOLD,
-	TAKEN_OFF_HOLD,
-	LEFT_MESSAGE,
-	STOP_USING_PHONE
 }

@@ -1,20 +1,16 @@
 package singleton;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 
 // ban than enum la singleton
 public enum EnumBasedSingleton {
 	INSTANCE;
 
+	private int value;
+
 	EnumBasedSingleton() {
 		value = 42;
 	}
-
-	private int value;
 
 	public int getValue() {
 		return value;
@@ -38,14 +34,14 @@ class EnumBasedSingletonApp {
 
 	static void saveToFile(EnumBasedSingleton singleton, String filename) throws IOException {
 		try (FileOutputStream fos = new FileOutputStream(filename);
-			 ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+		     ObjectOutputStream oos = new ObjectOutputStream(fos)) {
 			oos.writeObject(singleton);
 		}
 	}
 
 	static EnumBasedSingleton readFromFile(String filename) throws IOException, ClassNotFoundException {
 		try (FileInputStream fis = new FileInputStream(filename);
-			 ObjectInputStream ios = new ObjectInputStream(fis)) {
+		     ObjectInputStream ios = new ObjectInputStream(fis)) {
 			return (EnumBasedSingleton) ios.readObject();
 		}
 	}

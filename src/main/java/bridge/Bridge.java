@@ -5,6 +5,10 @@ import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 
+interface Render {
+	void renderCircle(float radius);
+}
+
 public class Bridge {
 	public static void main(String[] args) {
 		RasterRenderer rasterRenderer = new RasterRenderer();
@@ -24,10 +28,6 @@ public class Bridge {
 		instance.resize(2);
 		instance.draw();
 	}
-}
-
-interface Render {
-	void renderCircle(float radius);
 }
 
 class VectorRenderer implements Render {

@@ -6,6 +6,12 @@ import java.lang.reflect.Proxy;
 import java.util.HashMap;
 import java.util.Map;
 
+interface Human {
+	void work();
+
+	void talk();
+}
+
 public class DynamicProxy {
 	@SuppressWarnings("unchecked")
 	public static <T> T withLogging(T target, Class<T> itf) {
@@ -23,12 +29,6 @@ public class DynamicProxy {
 		logging.work();
 		System.out.println(logging);
 	}
-}
-
-interface Human {
-	void work();
-
-	void talk();
 }
 
 class Person implements Human {

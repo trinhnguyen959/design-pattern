@@ -3,18 +3,6 @@ package strategy.statics;
 import java.util.List;
 import java.util.function.Supplier;
 
-public class StaticStrategyApplication {
-	public static void main(String[] args) {
-		TextProcessor<MarkDownStrategy> mark = new TextProcessor<>(MarkDownStrategy::new);
-		mark.appendList(List.of("alpha", "beta", "gamma"));
-		System.out.println(mark);
-
-		TextProcessor<HtmlListStrategy> html = new TextProcessor<>(HtmlListStrategy::new);
-		html.appendList(List.of("alpha", "beta", "gamma"));
-		System.out.println(html);
-	}
-}
-
 enum OutputFormat {
 	MARK_DOWN,
 	HTML,
@@ -29,6 +17,18 @@ interface ListStrategy {
 
 	default void end(StringBuilder builder) {
 
+	}
+}
+
+public class StaticStrategyApplication {
+	public static void main(String[] args) {
+		TextProcessor<MarkDownStrategy> mark = new TextProcessor<>(MarkDownStrategy::new);
+		mark.appendList(List.of("alpha", "beta", "gamma"));
+		System.out.println(mark);
+
+		TextProcessor<HtmlListStrategy> html = new TextProcessor<>(HtmlListStrategy::new);
+		html.appendList(List.of("alpha", "beta", "gamma"));
+		System.out.println(html);
 	}
 }
 
@@ -70,8 +70,8 @@ class HtmlListStrategy implements ListStrategy {
 }
 
 class TextProcessor<LS extends ListStrategy> {
-	private StringBuilder builder = new StringBuilder();
-	private LS strategy;
+	private final StringBuilder builder = new StringBuilder();
+	private final LS strategy;
 
 	public TextProcessor(Supplier<? extends LS> supplier) {
 		strategy = supplier.get();

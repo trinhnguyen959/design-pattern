@@ -23,7 +23,7 @@ class User {
 
 class SecondUser {
 	static List<String> strings = new ArrayList<>();
-	private int[] names;
+	private final int[] names;
 
 	public SecondUser(String fullName) {
 		Function<String, Integer> getOrAdd = (String s) -> {

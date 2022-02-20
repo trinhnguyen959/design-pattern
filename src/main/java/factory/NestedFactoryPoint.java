@@ -1,7 +1,8 @@
 package factory;
 
 public class NestedFactoryPoint {
-	private double x, y;
+	private final double x;
+	private final double y;
 
 	private NestedFactoryPoint(double x, double y) {
 		this.x = x;

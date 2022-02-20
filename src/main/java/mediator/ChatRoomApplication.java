@@ -14,9 +14,9 @@ class ChatRoom {
 	}
 
 	public void broadcast(String source, String message) {
-		for(Person person : people) {
+		for (Person person : people) {
 			if (!person.name.equals(source)) {
-				person.receive(source,message);
+				person.receive(source, message);
 			}
 		}
 	}
@@ -30,9 +30,9 @@ class ChatRoom {
 }
 
 class Person {
+	private final List<String> chatLog = new ArrayList<>();
 	public String name;
 	public ChatRoom room;
-	private final List<String> chatLog = new ArrayList<>();
 
 	public Person(String name) {
 		this.name = name;

@@ -7,8 +7,8 @@ public class TemplateMethodApplication {
 }
 
 abstract class Game {
-	protected int current;
 	public final int numberOfPlayers;
+	protected int current;
 
 	public Game(int numberOfPlayers) {
 		this.numberOfPlayers = numberOfPlayers;

@@ -63,7 +63,7 @@ class BetterTextFormatting {
 		StringBuilder builder = new StringBuilder();
 		for (int i = 0; i < plainText.length(); ++i) {
 			char c = plainText.charAt(i);
-			for(TextRange range : formatting) {
+			for (TextRange range : formatting) {
 				if (range.covers(i) && range.capitalize) {
 					c = Character.toUpperCase(c);
 				}

@@ -63,9 +63,8 @@ class SimpleCreature {
 }
 
 class Creature implements Iterable<Integer> {
-	private int[] stats = new int[3];
-
 	private final int str = 0;
+	private final int[] stats = new int[3];
 
 	public int getStrength() {
 		return stats[str];

@@ -1,14 +1,14 @@
 package proxy;
 
+interface Driveable {
+	void drive();
+}
+
 public class ProtectionProxy {
 	public static void main(String[] args) {
 		Car car = new CarProxy(new Driver(12));
 		car.drive();
 	}
-}
-
-interface Driveable {
-	void drive();
 }
 
 class Car implements Driveable {

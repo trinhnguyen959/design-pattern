@@ -1,5 +1,11 @@
 package visitor.classvisitor;
 
+interface ExpressionVisitor {
+	void visit(DoubleExpression expression);
+
+	void visit(AdditionExpression additionExpression);
+}
+
 public class ClassVisitor {
 	public static void main(String[] args) {
 		AdditionExpression additionExpression = new AdditionExpression(
@@ -18,12 +24,6 @@ public class ClassVisitor {
 		expressionCalculator.visit(additionExpression);
 		System.out.println(expressionPrinter + " = " + expressionCalculator.result);
 	}
-}
-
-interface ExpressionVisitor {
-	void visit(DoubleExpression expression);
-
-	void visit(AdditionExpression additionExpression);
 }
 
 abstract class Expression {

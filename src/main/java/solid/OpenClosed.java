@@ -3,6 +3,23 @@ package solid;
 import java.util.List;
 import java.util.stream.Stream;
 
+enum Color {
+	RED, GREEN, BLUE
+}
+
+enum Size {
+	SMALL, MEDIUM, LARGE, YUGE
+}
+
+/*SOLUTION*/
+interface Specification<T> {
+	boolean isSatisfied(T item);
+}
+
+interface Filter<T> {
+	Stream<T> filter(List<T> items, Specification<T> spec);
+}
+
 public class OpenClosed {
 
 	public static void main(String[] args) {
@@ -23,17 +40,9 @@ public class OpenClosed {
 
 		System.out.println("\n Large blue items: ");
 		betterFilter.filter(products, new AndSpecification<>(
-				new ColorSpecification(Color.BLUE), new SizeSpecification(Size.LARGE)))
-		.forEach(product -> System.out.println(" - " + product.name + " is blue and large!"));
+						new ColorSpecification(Color.BLUE), new SizeSpecification(Size.LARGE)))
+				.forEach(product -> System.out.println(" - " + product.name + " is blue and large!"));
 	}
-}
-
-enum Color {
-	RED, GREEN, BLUE
-}
-
-enum Size {
-	SMALL, MEDIUM, LARGE, YUGE
 }
 
 class Product {
@@ -60,15 +69,6 @@ class ProductFilter {
 	public Stream<Product> filterBySizeAndColor(List<Product> products, Size size, Color color) {
 		return products.stream().filter(product -> product.size == size && product.color == color);
 	}
-}
-
-/*SOLUTION*/
-interface Specification<T> {
-	boolean isSatisfied(T item);
-}
-
-interface Filter<T> {
-	Stream<T> filter(List<T> items, Specification<T> spec);
 }
 
 class ColorSpecification implements Specification<Product> {

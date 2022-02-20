@@ -1,23 +1,17 @@
 package singleton;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
+import java.io.*;
 
 public class BasicSingleton implements Serializable {
+	private static final BasicSingleton INSTANCE = new BasicSingleton();
+	private int value;
+
 	private BasicSingleton() {
 	}
-
-	private static final BasicSingleton INSTANCE = new BasicSingleton();
 
 	public static BasicSingleton getInstance() {
 		return INSTANCE;
 	}
-
-	private int value;
 
 	public int getValue() {
 		return value;
@@ -68,14 +62,14 @@ class SingletonIssue {
 
 	static void saveToFile(BasicSingleton singleton, String filename) throws IOException {
 		try (FileOutputStream fos = new FileOutputStream(filename);
-			 ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+		     ObjectOutputStream oos = new ObjectOutputStream(fos)) {
 			oos.writeObject(singleton);
 		}
 	}
 
 	static BasicSingleton readFromFile(String filename) throws IOException, ClassNotFoundException {
 		try (FileInputStream fis = new FileInputStream(filename);
-			 ObjectInputStream ios = new ObjectInputStream(fis)) {
+		     ObjectInputStream ios = new ObjectInputStream(fis)) {
 			return (BasicSingleton) ios.readObject();
 		}
 	}

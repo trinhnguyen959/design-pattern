@@ -23,7 +23,7 @@ public class BrokerChain {
 
 class Event<Args> {
 	private int index = 0;
-	private Map<Integer, Consumer<Args>> handlers = new HashMap<>();
+	private final Map<Integer, Consumer<Args>> handlers = new HashMap<>();
 
 	public int subcribe(Consumer<Args> handler) {
 		int i = index;
@@ -44,17 +44,16 @@ class Event<Args> {
 
 class Query {
 	public String creatureName;
-	enum Argument {
-		ATTACK, DEFENSE
-	}
-
 	public Argument argument;
 	public int result;
-
 	public Query(String creatureName, Argument argument, int result) {
 		this.creatureName = creatureName;
 		this.argument = argument;
 		this.result = result;
+	}
+
+	enum Argument {
+		ATTACK, DEFENSE
 	}
 
 }
@@ -64,9 +63,9 @@ class Game {
 }
 
 class GameCreature {
-	private Game game;
 	public String name;
 	public int baseAttack, baseDefense;
+	private final Game game;
 
 	public GameCreature(Game game, String name, int baseAttack, int baseDefense) {
 		this.game = game;

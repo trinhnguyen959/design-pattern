@@ -1,5 +1,9 @@
 package decorator;
 
+interface Shape {
+	String info();
+}
+
 public class DynamicDecoratorComposition {
 	public static void main(String[] args) {
 		Circle circle = new Circle(10);
@@ -11,10 +15,6 @@ public class DynamicDecoratorComposition {
 		TransparentShape newCircle = new TransparentShape(new ColorShape(new Circle(5), "green"), 50);
 		System.out.println(newCircle.info());
 	}
-}
-
-interface Shape {
-	String info();
 }
 
 class Circle implements Shape {
@@ -55,8 +55,8 @@ class Square implements Shape {
 
 // Decorator
 class ColorShape implements Shape {
-	private Shape shape;
-	private String color;
+	private final Shape shape;
+	private final String color;
 
 	public ColorShape(Shape shape, String color) {
 		this.shape = shape;
@@ -71,8 +71,8 @@ class ColorShape implements Shape {
 
 // Decorator
 class TransparentShape implements Shape {
-	private Shape shape;
-	private int transparency;
+	private final Shape shape;
+	private final int transparency;
 
 	public TransparentShape(Shape shape, int transparency) {
 		this.shape = shape;

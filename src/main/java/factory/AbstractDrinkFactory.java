@@ -9,16 +9,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+interface HotDrink {
+	void consume();
+}
+
+interface HotDrinkFactory {
+	HotDrink prepare(int amount);
+}
+
 public class AbstractDrinkFactory {
 	public static void main(String[] args) throws Exception {
 		HotDrinkMachine machine = new HotDrinkMachine();
 		HotDrink drink = machine.makeDrink();
 		drink.consume();
 	}
-}
-
-interface HotDrink {
-	void consume();
 }
 
 class Tea implements HotDrink {
@@ -33,10 +37,6 @@ class Coffee implements HotDrink {
 	public void consume() {
 		System.out.println("This coffee is delicious");
 	}
-}
-
-interface HotDrinkFactory {
-	HotDrink prepare(int amount);
 }
 
 class TeaFactory implements HotDrinkFactory {

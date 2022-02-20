@@ -27,7 +27,7 @@ class Address implements Cloneable {
 	}
 }
 
-class Person implements Cloneable{
+class Person implements Cloneable {
 	public String[] names;
 	public Address address;
 
@@ -52,7 +52,7 @@ class Person implements Cloneable{
 
 class PrototypeApplication {
 	public static void main(String[] args) {
-		Person john = new Person(new String[] {"John", "Smith"}, new Address("London Road", 123));
+		Person john = new Person(new String[]{"John", "Smith"}, new Address("London Road", 123));
 		Person jane = (Person) john.clone();
 		jane.names[0] = "Jane";
 		jane.address.houseNumber = 456;

@@ -2,6 +2,12 @@ package nullobject;
 
 import java.lang.reflect.Proxy;
 
+interface Log {
+	void info(String message);
+
+	void warn(String message);
+}
+
 public class NullObjectApplication {
 	public static void main(String[] args) {
 		Log log = noOp(Log.class);
@@ -16,7 +22,7 @@ public class NullObjectApplication {
 				itf.getClassLoader(),
 				new Class<?>[]{itf},
 				(proxy, method, args) -> {
-					if (method.getReturnType().equals(Void.TYPE)){
+					if (method.getReturnType().equals(Void.TYPE)) {
 						return null;
 					} else {
 						return method.getReturnType().getConstructor().newInstance();
@@ -24,12 +30,6 @@ public class NullObjectApplication {
 				}
 		);
 	}
-}
-
-interface Log {
-	void info(String message);
-
-	void warn(String message);
 }
 
 class ConsoleLog implements Log {

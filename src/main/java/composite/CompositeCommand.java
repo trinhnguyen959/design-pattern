@@ -21,6 +21,8 @@ public class CompositeCommand {
 }
 
 class GraphicObject {
+	public String color;
+	public List<GraphicObject> children = new ArrayList<>();
 	protected String name = "Group";
 
 	public GraphicObject() {
@@ -33,9 +35,6 @@ class GraphicObject {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public String color;
-	public List<GraphicObject> children = new ArrayList<>();
 
 	private void print(StringBuilder stringBuilder, int depth) {
 		stringBuilder.append(String.join("", Collections.nCopies(depth, "*")))

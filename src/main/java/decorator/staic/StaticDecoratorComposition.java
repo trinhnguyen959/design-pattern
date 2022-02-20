@@ -2,6 +2,10 @@ package decorator.staic;
 
 import java.util.function.Supplier;
 
+interface Shape {
+	String info();
+}
+
 public class StaticDecoratorComposition {
 	public static void main(String[] args) {
 		ColoredShape<Square> blueSquare = new ColoredShape<>(() -> new Square(20), "blue");
@@ -13,10 +17,6 @@ public class StaticDecoratorComposition {
 		System.out.println(greenCircle.info());
 
 	}
-}
-
-interface Shape {
-	String info();
 }
 
 class Circle implements Shape {
@@ -56,8 +56,8 @@ class Square implements Shape {
 }
 
 class ColoredShape<T extends Shape> implements Shape {
-	private Shape shape;
-	private String color;
+	private final Shape shape;
+	private final String color;
 
 	public ColoredShape(Supplier<? extends T> ctor, String color) {
 		shape = ctor.get();
@@ -71,8 +71,8 @@ class ColoredShape<T extends Shape> implements Shape {
 }
 
 class TransparentShape<T extends Shape> implements Shape {
-	private Shape shape;
-	private int transparency;
+	private final Shape shape;
+	private final int transparency;
 
 	public TransparentShape(Supplier<? extends T> ctor, int transparency) {
 		shape = ctor.get();

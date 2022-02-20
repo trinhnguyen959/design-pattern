@@ -35,12 +35,9 @@ public class TestabilityIssues {
 }
 
 class SingletonDatabase implements Database {
-	private final Dictionary<String, Integer> capitals = new Hashtable<>();
+	private static final SingletonDatabase INSTANCE = new SingletonDatabase();
 	private static int instanceCount = 0;
-
-	public static int getCount() {
-		return instanceCount;
-	}
+	private final Dictionary<String, Integer> capitals = new Hashtable<>();
 
 	private SingletonDatabase() {
 		instanceCount++;
@@ -60,7 +57,9 @@ class SingletonDatabase implements Database {
 		}
 	}
 
-	private static final SingletonDatabase INSTANCE = new SingletonDatabase();
+	public static int getCount() {
+		return instanceCount;
+	}
 
 	public static SingletonDatabase getInstance() {
 		return INSTANCE;

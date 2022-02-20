@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /*
-* Single class,method single responsibility
-* */
+ * Single class,method single responsibility
+ * */
 public class SingleResponsibility {
 
 	public static void main(String[] args) throws IOException {

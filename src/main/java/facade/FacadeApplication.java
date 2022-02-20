@@ -53,16 +53,12 @@ class ViewPort {
 }
 
 class Console {
-	private List<ViewPort> viewPorts = new ArrayList<>();
 	int width, height;
+	private final List<ViewPort> viewPorts = new ArrayList<>();
 
 	public Console(int width, int height) {
 		this.width = width;
 		this.height = height;
-	}
-
-	public void addViewPort(ViewPort viewPort) {
-		viewPorts.add(viewPort);
 	}
 
 	public static Console newConsole(int width, int height) {
@@ -74,13 +70,17 @@ class Console {
 
 	}
 
+	public void addViewPort(ViewPort viewPort) {
+		viewPorts.add(viewPort);
+	}
+
 	public void render() {
 		for (int y = 0; y < height; ++y) {
 			for (int x = 0; x < width; ++x) {
 				for (ViewPort viewPort : viewPorts) {
 					System.out.println(viewPort.charAt(x, y));
 				}
-				System.out.println("");
+				System.out.println();
 			}
 		}
 	}

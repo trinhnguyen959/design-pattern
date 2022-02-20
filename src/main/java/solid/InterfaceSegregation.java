@@ -1,18 +1,30 @@
 package solid;
 
-public class InterfaceSegregation {
-}
-
-class Document {
-
-}
-
 interface Machine {
 	void print(Document document);
 
 	void fax(Document document);
 
 	void scan(Document document);
+}
+
+/*SOLUTION*/
+interface Printer {
+	void print(Document document);
+}
+
+interface Scanner {
+	void scan(Document document);
+}
+
+interface MultiFunctionDevice extends Printer, Scanner {
+}
+
+public class InterfaceSegregation {
+}
+
+class Document {
+
 }
 
 class MultiFunctionPrinter implements Machine {
@@ -50,15 +62,6 @@ class OldFashionPrinter implements Machine {
 	}
 }
 
-/*SOLUTION*/
-interface Printer {
-	void print(Document document);
-}
-
-interface Scanner {
-	void scan(Document document);
-}
-
 class JustAPrinter implements Printer {
 
 	@Override
@@ -77,9 +80,6 @@ class Photocopier implements Printer, Scanner {
 	public void scan(Document document) {
 
 	}
-}
-
-interface MultiFunctionDevice extends Printer, Scanner {
 }
 
 class MultiFunctionMachine implements MultiFunctionDevice {

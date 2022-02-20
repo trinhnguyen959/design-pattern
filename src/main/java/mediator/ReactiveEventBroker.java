@@ -33,9 +33,9 @@ class EventBroker extends Observable<Integer> {
 }
 
 class FootballPlayer {
-	private int goalsScore = 0;
 	private final EventBroker eventBroker;
 	public String name;
+	private int goalsScore = 0;
 
 	public FootballPlayer(EventBroker eventBroker, String name) {
 		this.eventBroker = eventBroker;

@@ -48,7 +48,8 @@ class Node<T> {
 }
 
 class InOrderIterator<T> implements Iterator<T> {
-	private Node<T> current, root;
+	private Node<T> current;
+	private final Node<T> root;
 	private boolean yieldedStart;
 
 	public InOrderIterator(Node<T> root) {
@@ -95,7 +96,7 @@ class InOrderIterator<T> implements Iterator<T> {
 }
 
 class BinaryTree<T> implements Iterable<T> {
-	private Node<T> root;
+	private final Node<T> root;
 
 	public BinaryTree(Node<T> root) {
 		this.root = root;

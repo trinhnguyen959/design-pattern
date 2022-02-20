@@ -2,20 +2,6 @@ package strategy;
 
 import java.util.List;
 
-public class DynamicStrategyApplication {
-	public static void main(String[] args) {
-		TextProcessor processor = new TextProcessor(OutputFormat.MARK_DOWN);
-		processor.appendList(List.of("liberte", "egalite", "fraternite"));
-		System.out.println(processor);
-
-		processor.clear();
-
-		processor.setOutputFormat(OutputFormat.HTML);
-		processor.appendList(List.of("inheritance", "encapsulation", "polymorphism"));
-		System.out.println(processor);
-	}
-}
-
 enum OutputFormat {
 	MARK_DOWN,
 	HTML,
@@ -30,6 +16,20 @@ interface ListStrategy {
 
 	default void end(StringBuilder builder) {
 
+	}
+}
+
+public class DynamicStrategyApplication {
+	public static void main(String[] args) {
+		TextProcessor processor = new TextProcessor(OutputFormat.MARK_DOWN);
+		processor.appendList(List.of("liberte", "egalite", "fraternite"));
+		System.out.println(processor);
+
+		processor.clear();
+
+		processor.setOutputFormat(OutputFormat.HTML);
+		processor.appendList(List.of("inheritance", "encapsulation", "polymorphism"));
+		System.out.println(processor);
 	}
 }
 
@@ -71,7 +71,7 @@ class HtmlListStrategy implements ListStrategy {
 }
 
 class TextProcessor {
-	private StringBuilder builder = new StringBuilder();
+	private final StringBuilder builder = new StringBuilder();
 	private ListStrategy strategy;
 
 	public TextProcessor(OutputFormat format) {

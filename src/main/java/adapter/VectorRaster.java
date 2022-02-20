@@ -1,13 +1,6 @@
 package adapter;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Spliterator;
+import java.util.*;
 import java.util.function.Consumer;
 
 public class VectorRaster {
@@ -106,8 +99,8 @@ class VectorRectangle extends VectorObject {
 
 class LineToPointAdapter implements Iterable<Point> {
 	private static int count = 0;
-	private static Map<Integer, List<Point>> cache = new HashMap<>();
-	private int hash;
+	private static final Map<Integer, List<Point>> cache = new HashMap<>();
+	private final int hash;
 
 	public LineToPointAdapter(Line line) {
 		hash = line.hashCode();

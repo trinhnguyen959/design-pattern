@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+interface Element {
+	int eval();
+}
+
 public class LexingInterpreter {
 	static List<Token> lex(String input) {
 		ArrayList<Token> result = new ArrayList<>();
@@ -93,17 +97,8 @@ public class LexingInterpreter {
 }
 
 class Token {
-	public enum Type {
-		INTEGER,
-		PLUS,
-		MINUS,
-		LPAREN,
-		RPAREN
-	}
-
 	public Type type;
 	public String text;
-
 	public Token(Type type, String text) {
 		this.type = type;
 		this.text = text;
@@ -113,10 +108,14 @@ class Token {
 	public String toString() {
 		return "`" + text + "`";
 	}
-}
 
-interface Element {
-	int eval();
+	public enum Type {
+		INTEGER,
+		PLUS,
+		MINUS,
+		LPAREN,
+		RPAREN
+	}
 }
 
 class Integer implements Element {
@@ -133,11 +132,6 @@ class Integer implements Element {
 }
 
 class BinaryOperator implements Element {
-	public enum Type {
-		ADDITION,
-		SUBTRACTION,
-	}
-
 	public Type type;
 	public Element left, right;
 
@@ -151,5 +145,10 @@ class BinaryOperator implements Element {
 			default:
 				return 0;
 		}
+	}
+
+	public enum Type {
+		ADDITION,
+		SUBTRACTION,
 	}
 }

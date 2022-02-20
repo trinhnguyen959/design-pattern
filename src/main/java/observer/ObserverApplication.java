@@ -3,17 +3,21 @@ package observer;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ObserverApplication implements Observer<Person> {
-	public static void main(String[] args) {
-		new ObserverApplication();
-	}
+interface Observer<T> {
+	void handle(PropertyChangedEventArgs<T> args);
+}
 
+public class ObserverApplication implements Observer<Person> {
 	public ObserverApplication() {
 		Person person = new Person();
 		person.subscribe(this);
 		for (int i = 20; i < 24; ++i) {
 			person.setAge(i);
 		}
+	}
+
+	public static void main(String[] args) {
+		new ObserverApplication();
 	}
 
 	@Override
@@ -32,10 +36,6 @@ class PropertyChangedEventArgs<T> {
 		this.propertyName = propertyName;
 		this.newValue = newValue;
 	}
-}
-
-interface Observer<T> {
-	void handle(PropertyChangedEventArgs<T> args);
 }
 
 class Observable<T> {

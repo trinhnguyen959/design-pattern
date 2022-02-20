@@ -1,5 +1,20 @@
 package visitor.acyclic;
 
+interface Visitor {
+}
+
+interface ExpressionVisitor extends Visitor {
+	void visit(Expression expression);
+}
+
+interface DoubleExpressionVisitor extends Visitor {
+	void visit(DoubleExpression doubleExpression);
+}
+
+interface AdditionExpressionVisitor extends Visitor {
+	void visit(AdditionExpression additionExpression);
+}
+
 public class AcyclicVisitor {
 	public static void main(String[] args) {
 		AdditionExpression additionExpression = new AdditionExpression(
@@ -18,21 +33,6 @@ public class AcyclicVisitor {
 		expressionCalculator.visit(additionExpression);
 		System.out.println(expressionPrinter + " = " + expressionCalculator.result);
 	}
-}
-
-interface Visitor {
-}
-
-interface ExpressionVisitor extends Visitor {
-	void visit(Expression expression);
-}
-
-interface DoubleExpressionVisitor extends Visitor {
-	void visit(DoubleExpression doubleExpression);
-}
-
-interface AdditionExpressionVisitor extends Visitor {
-	void visit(AdditionExpression additionExpression);
 }
 
 abstract class Expression {

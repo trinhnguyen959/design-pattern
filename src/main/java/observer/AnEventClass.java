@@ -18,8 +18,8 @@ public class AnEventClass {
 }
 
 class Event<TArgs> {
-	private int count = 0;
 	private final Map<Integer, Consumer<TArgs>> handlers = new HashMap<>();
+	private int count = 0;
 
 	public Subscription addHandler(Consumer<TArgs> handler) {
 		int i = count;

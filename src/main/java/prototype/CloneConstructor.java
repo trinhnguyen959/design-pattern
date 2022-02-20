@@ -19,7 +19,7 @@ class CAddress {
 		this.country = country;
 	}
 
-	public CAddress (CAddress other) {
+	public CAddress(CAddress other) {
 		this(other.streetAddress, other.city, other.country);
 	}
 

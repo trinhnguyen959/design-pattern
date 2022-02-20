@@ -70,8 +70,7 @@ class PersonJobBuilder extends ComplexPersonBuilder {
 		return this;
 	}
 
-	public PersonJobBuilder earning(int annualIncome)
-	{
+	public PersonJobBuilder earning(int annualIncome) {
 		person.annualIncome = annualIncome;
 		return this;
 	}

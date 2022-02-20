@@ -8,8 +8,28 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+enum HandState {
+	OFF_HOOK, // starting
+	ON_HOOK, // terminal
+	CONNECTING,
+	CONNECTED,
+	ON_HOLD
+}
+
+enum Trigger {
+	CALL_DIALED,
+	HUNG_UP,
+	CALL_CONNECTED,
+	PLACED_ON_HOLD,
+	TAKEN_OFF_HOLD,
+	LEFT_MESSAGE,
+	STOP_USING_PHONE
+}
+
 public class HandMadeStateMachine {
-	private static Map<HandState, List<Pair<Trigger, HandState>>> rules = new HashMap<>();
+	private static final HandState exitState = HandState.ON_HOOK;
+	private static final Map<HandState, List<Pair<Trigger, HandState>>> rules = new HashMap<>();
+	private static HandState currentState = HandState.OFF_HOOK;
 
 	static {
 		rules.put(HandState.OFF_HOOK, List.of(
@@ -30,9 +50,6 @@ public class HandMadeStateMachine {
 				new Pair<>(Trigger.HUNG_UP, HandState.OFF_HOOK)
 		));
 	}
-
-	private static HandState currentState = HandState.OFF_HOOK;
-	private static final HandState exitState = HandState.ON_HOOK;
 
 	public static void main(String[] args) {
 		BufferedReader console = new BufferedReader(
@@ -64,22 +81,4 @@ public class HandMadeStateMachine {
 		} while (currentState != exitState);
 		System.out.println("And we are done!");
 	}
-}
-
-enum HandState {
-	OFF_HOOK, // starting
-	ON_HOOK, // terminal
-	CONNECTING,
-	CONNECTED,
-	ON_HOLD
-}
-
-enum Trigger {
-	CALL_DIALED,
-	HUNG_UP,
-	CALL_CONNECTED,
-	PLACED_ON_HOLD,
-	TAKEN_OFF_HOLD,
-	LEFT_MESSAGE,
-	STOP_USING_PHONE
 }

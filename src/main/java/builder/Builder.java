@@ -14,9 +14,9 @@ public class Builder {
 	}
 
 	static class HtmlElement {
+		private final String newLine = System.lineSeparator();
 		public String name, text;
 		public List<HtmlElement> elements = new ArrayList<>();
-		private final String newLine = System.lineSeparator();
 
 		public HtmlElement() {
 		}

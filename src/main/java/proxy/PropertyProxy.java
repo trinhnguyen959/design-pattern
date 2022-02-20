@@ -42,13 +42,13 @@ class Property<T> {
 }
 
 class Creature {
-	private Property<Integer> agility = new Property<>(10);
-
-	public void setAgility(int value) {
-		agility.setValue(value);
-	}
+	private final Property<Integer> agility = new Property<>(10);
 
 	public int getAgility() {
 		return agility.getValue();
+	}
+
+	public void setAgility(int value) {
+		agility.setValue(value);
 	}
 }

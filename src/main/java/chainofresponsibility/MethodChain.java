@@ -20,9 +20,9 @@ public class MethodChain {
 }
 
 class Creature {
-	String name;
 	public int attack;
 	public int defense;
+	String name;
 
 	public Creature(String name, int attack, int defense) {
 		this.name = name;

@@ -1,14 +1,10 @@
 package singleton;
 
-import java.io.File;
 import java.io.IOException;
 
 public class StaticBlockSingleton {
-	private StaticBlockSingleton() throws IOException {
-		System.out.println("Singleton is initializing");
-//		File.createTempFile(".", ".");
-	}
 	private static StaticBlockSingleton instance;
+
 	static {
 		try {
 			instance = new StaticBlockSingleton();
@@ -16,6 +12,11 @@ public class StaticBlockSingleton {
 			System.err.println("Fail to create singleton");
 		}
 		System.out.println("Singleton create successful!");
+	}
+
+	private StaticBlockSingleton() throws IOException {
+		System.out.println("Singleton is initializing");
+//		File.createTempFile(".", ".");
 	}
 
 	public static StaticBlockSingleton getInstance() {
